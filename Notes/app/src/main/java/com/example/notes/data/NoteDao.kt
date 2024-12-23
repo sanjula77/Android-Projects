@@ -1,24 +1,20 @@
 package com.example.notes.data
 
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Query
-import androidx.room.Upsert
+import androidx.room.*
 import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface NoteDao {
 
-    @Upsert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun upsertNote(note: Note)
 
     @Delete
     suspend fun deleteNote(note: Note)
 
-    @Query("SELECT * FROM note ORDER BY dateAdded DESC")
+    @Query("SELECT * FROM Note ORDER BY dateAdded DESC")
     fun getNotesByDateAdded(): Flow<List<Note>>
 
-    @Query("SELECT * FROM note ORDER BY title ASC")
-    suspend fun getNoteByTitle(): Flow<List<Note>>
-
+    @Query("SELECT * FROM Note ORDER BY title ASC")
+    fun getNotesByTitle(): Flow<List<Note>>
 }

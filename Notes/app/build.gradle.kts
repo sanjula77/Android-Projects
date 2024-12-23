@@ -6,7 +6,7 @@ plugins {
 
 android {
     namespace = "com.example.notes"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.example.notes"
@@ -38,6 +38,7 @@ android {
 
 dependencies {
     implementation(libs.androidx.room.ktx)
+    implementation(libs.androidx.material3.android)
     kapt(libs.androidx.room.compiler)
 
     implementation(libs.androidx.navigation.compose)
