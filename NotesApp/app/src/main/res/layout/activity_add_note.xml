@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.notesapp.AddNoteViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- Note Title EditText -->
+        <EditText
+            android:id="@+id/noteTitleEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Note Title"
+            android:layout_marginTop="16dp"
+            android:padding="16dp" />
+
+        <!-- Note Content EditText -->
+        <EditText
+            android:id="@+id/noteContentEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Note Content"
+            android:layout_below="@id/noteTitleEditText"
+            android:layout_marginTop="16dp"
+            android:padding="16dp" />
+
+        <!-- Save Button positioned below content EditText -->
+        <Button
+            android:id="@+id/saveNoteButton"
+            android:layout_width="296dp"
+            android:layout_height="67dp"
+            android:layout_below="@id/noteContentEditText"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="504dp"
+            android:layout_marginBottom="16dp"
+            android:text="Save Note" />
+    </RelativeLayout>
+
+</layout>

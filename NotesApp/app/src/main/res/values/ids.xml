@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="noteTitle" type="id" />
+    <item name="noteContent" type="id" />
+    <item name="noteTimestamp" type="id" />
+    <item name="noteTitleEditText" type="id" />
+    <item name="noteContentEditText" type="id" />
+    <item name="saveNoteButton" type="id" />
+</resources>
