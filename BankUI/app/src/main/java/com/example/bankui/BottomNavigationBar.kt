@@ -26,7 +26,7 @@ val items = listOf(
         icon = Icons.Rounded.Wallet,
     ),
     BottomNavigationBar(
-        title = "Notifications",
+        title = "Notifictn",
         icon = Icons.Rounded.Notifications,
     ),
     BottomNavigationBar(

@@ -90,7 +90,7 @@ fun CardItem(index: Int) {
     if (index == cards.size - 1) {
          lastItemPaddingEnd = 16.dp
     }
-    var image = painterResource(id = R.drawable.ic_visa)
+    var image = painterResource(id = R.drawable.ic_mastercard)
     if (card.cardType == "MASTER CARD") {
        image = painterResource(id = R.drawable.ic_mastercard)
     }
