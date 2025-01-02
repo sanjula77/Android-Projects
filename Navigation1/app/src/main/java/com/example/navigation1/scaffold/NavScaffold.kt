@@ -87,6 +87,10 @@ fun NavGraphBuilder.navigationGraph(navController: NavController, paddingValues:
         ScreenOne(navController, modifier = Modifier.padding(paddingValues))
     }
     composable("screen_two") {
+
+        val data = it.arguments?.getString("data") ?: "No data available"
+        navController.currentBackStackEntry?.arguments?.putString("data", data)
+
         ScreenTwo(navController, modifier = Modifier.padding(paddingValues))
     }
     composable("screen_three") {
@@ -100,9 +104,14 @@ fun getMyNavGraph(controller: NavController, paddingValues: PaddingValues): NavG
         composable("screen_one") {
             ScreenOne(controller, modifier = Modifier.padding(paddingValues))
         }
-        composable("screen_two") {
+
+        composable("screen_two/{data}") {
+            val data = it.arguments?.getString("data") ?: "No data available"
+            controller.currentBackStackEntry?.arguments?.putString("data", data)
+
             ScreenTwo(controller,modifier = Modifier.padding(paddingValues))
         }
+
         composable("screen_three") {
             ScreenThree(controller, modifier = Modifier.padding(paddingValues))
         }

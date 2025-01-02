@@ -15,6 +15,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.navigation1.Student
+import kotlinx.serialization.json.Json
+
+private val json = Json { prettyPrint = true }
 
 @Composable
 fun ScreenTwo(navController: NavController, modifier: Modifier) {
@@ -32,6 +36,17 @@ fun ScreenTwo(navController: NavController, modifier: Modifier) {
                 style = MaterialTheme.typography.headlineMedium,
                 fontWeight = FontWeight.SemiBold
             )
+
+            Spacer(modifier = Modifier.height(50.dp))
+
+            val jsonData = navController.currentBackStackEntry?.arguments?.getString("data") ?: "No data available"
+            val sampleStudent = json.decodeFromString(Student.serializer(), jsonData)
+
+            Text(text = "Name: ${sampleStudent.name}")
+            Text(text = "Age: ${sampleStudent.age}")
+            Text(text = "Grade: ${sampleStudent.grade}")
+            Text(text = "Email: ${sampleStudent.email}")
+
             Spacer(modifier = Modifier.height(50.dp))
             Button(onClick = {navController.navigate("screen_three")}) {
                 Text(
