@@ -1,4 +1,4 @@
-package com.example.navigation1
+package com.example.navigation1.screens
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -17,7 +17,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 
 @Composable
-fun ScreenOne(navController: NavController) {
+fun ScreenOne(navController: NavController, modifier: Modifier) {
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background

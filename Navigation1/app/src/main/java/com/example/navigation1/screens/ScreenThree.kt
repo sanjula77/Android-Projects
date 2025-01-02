@@ -1,4 +1,4 @@
-package com.example.navigation1
+package com.example.navigation1.screens
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -17,7 +17,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 
 @Composable
-fun ScreenTwo(navController: NavController) {
+fun ScreenThree(navController: NavController, modifier: Modifier) {
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background
@@ -28,16 +28,11 @@ fun ScreenTwo(navController: NavController) {
             verticalArrangement = Arrangement.Center
         ) {
             Text(
-                text = "Screen Two",
+                text = "Screen Three",
                 style = MaterialTheme.typography.headlineMedium,
                 fontWeight = FontWeight.SemiBold
             )
             Spacer(modifier = Modifier.height(50.dp))
-            Button(onClick = {navController.navigate("screen_three")}) {
-                Text(
-                    text = "screen Three"
-                )
-            }
             Button(onClick = {navController.popBackStack()}) {
                 Text(
                     text = "Back"
