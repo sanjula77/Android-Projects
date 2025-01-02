@@ -39,24 +39,38 @@ fun ScreenTwo(navController: NavController, modifier: Modifier) {
 
             Spacer(modifier = Modifier.height(50.dp))
 
-            val jsonData = navController.currentBackStackEntry?.arguments?.getString("data") ?: "No data available"
-            val sampleStudent = json.decodeFromString(Student.serializer(), jsonData)
+            // Retrieve the data passed via navigation arguments
+            val jsonData = navController.currentBackStackEntry?.arguments?.getString("data")
 
+            // Updated: Add error handling for null or malformed JSON
+            val sampleStudent = try {
+                if (jsonData != null) {
+                    json.decodeFromString(Student.serializer(), jsonData)
+                } else {
+                    // Default fallback if no data is passed
+                    Student(name = "Unknown", age = 0, grade = "N/A", email = "N/A")
+                }
+            } catch (e: Exception) {
+                // Handle invalid JSON format gracefully
+                Student(name = "Error", age = 0, grade = "Invalid Data", email = "N/A")
+            }
+
+            // Display student information
             Text(text = "Name: ${sampleStudent.name}")
             Text(text = "Age: ${sampleStudent.age}")
             Text(text = "Grade: ${sampleStudent.grade}")
             Text(text = "Email: ${sampleStudent.email}")
 
             Spacer(modifier = Modifier.height(50.dp))
-            Button(onClick = {navController.navigate("screen_three")}) {
-                Text(
-                    text = "screen Three"
-                )
+
+            // Navigation to Screen Three
+            Button(onClick = { navController.navigate("screen_three") }) {
+                Text(text = "screen Three")
             }
-            Button(onClick = {navController.popBackStack()}) {
-                Text(
-                    text = "Back"
-                )
+
+            // Navigate back to the previous screen
+            Button(onClick = { navController.popBackStack() }) {
+                Text(text = "Back")
             }
         }
     }
