@@ -24,8 +24,10 @@ import com.example.navigation1.viewModel.SharedViewModel
 @Composable
 fun ScreenTwo(navController: NavController, sharedViewModel: SharedViewModel) {
 
+/*
     val context = LocalContext.current
     val myApplication = context.applicationContext as MyApplication
+*/
 
     Surface(
         modifier = Modifier.fillMaxSize(),
@@ -44,11 +46,11 @@ fun ScreenTwo(navController: NavController, sharedViewModel: SharedViewModel) {
 
             Spacer(modifier = Modifier.height(50.dp))
 
-            Text(text = "Student ID: ${sharedViewModel.student.value?.id}")
-            Text(text = "Name: ${sharedViewModel.student.value?.name}")
-            Text(text = "Age: ${sharedViewModel.student.value?.age}")
-            Text(text = "Grade: ${sharedViewModel.student.value?.grade}")
-            Text(text = "Email: ${sharedViewModel.student.value?.email}")
+            Text(text = "Student ID: ${sharedViewModel.getStudent().id}")
+            Text(text = "Name: ${sharedViewModel.getStudent().name}")
+            Text(text = "Age: ${sharedViewModel.getStudent().age}")
+            Text(text = "Grade: ${sharedViewModel.getStudent().grade}")
+            Text(text = "Email: ${sharedViewModel.getStudent().email}")
 
             Spacer(modifier = Modifier.height(50.dp))
             // Navigation to Screen Three

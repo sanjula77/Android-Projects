@@ -21,6 +21,7 @@ import com.example.navigation1.viewModel.SharedViewModel
 @Composable
 fun ScreenOne(navController: NavController, sharedViewModel: SharedViewModel) {
 
+/*
     val sampleStudent = Student(
         id = 1,
         name = "John Doe",
@@ -28,8 +29,7 @@ fun ScreenOne(navController: NavController, sharedViewModel: SharedViewModel) {
         grade = "A",
         email = "john@example.com"
     )
-
-
+*/
 
     Surface(
         modifier = Modifier.fillMaxSize(),
@@ -48,7 +48,7 @@ fun ScreenOne(navController: NavController, sharedViewModel: SharedViewModel) {
             )
             Spacer(modifier = Modifier.height(50.dp))
             Button(onClick = {
-                sharedViewModel.student.value = sampleStudent
+                sharedViewModel.id.value = 1
                 navController.navigate("screen_two")})
             {
                 Text(
