@@ -1,5 +1,6 @@
 package com.example.navigation1.screens
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -26,21 +27,7 @@ import com.example.navigation1.viewModel.SharedViewModel
 @Composable
 fun ScreenOne(navController: NavController, sharedViewModel: SharedViewModel) {
 
-    val isDialogVisible = remember {
-        mutableStateOf(false)
-    }
 
-    when {
-        isDialogVisible.value -> {
-            SampleDialog(
-                onDismissRequest = { isDialogVisible.value = false },
-                onConfirmation = { isDialogVisible.value = false },
-                dialogTitle = "Sample Dialog",
-                dialogText = "This is a sample dialog.",
-                icon = Icons.Filled.Info
-            )
-        }
-    }
 
 /*
     val sampleStudent = Student(
@@ -63,7 +50,7 @@ fun ScreenOne(navController: NavController, sharedViewModel: SharedViewModel) {
         ) {
 
             Button(onClick = {
-                isDialogVisible.value = true
+                navController.navigate("sample_dialog")
             }) {
                 Text(text = "Show Dialog")
             }

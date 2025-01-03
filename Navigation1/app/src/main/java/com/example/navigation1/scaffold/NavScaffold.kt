@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Build
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -17,7 +18,9 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.dialog
 import androidx.navigation.createGraph
+import com.example.navigation1.component.SampleDialog
 import com.example.navigation1.screens.ScreenOne
 import com.example.navigation1.screens.ScreenThree
 import com.example.navigation1.screens.ScreenTwo
@@ -114,6 +117,16 @@ fun getMyNavGraph(controller: NavController, paddingValues: PaddingValues, share
 
         composable("screen_three") {
             ScreenThree(controller, modifier = Modifier.padding(paddingValues))
+        }
+
+        dialog("sample_dialog") {
+            SampleDialog(
+                onDismissRequest = { controller.popBackStack() },
+                onConfirmation = { controller.popBackStack() },
+                dialogTitle = "Sample Dialog",
+                dialogText = "This is a sample dialog.",
+                icon = Icons.Filled.Build,
+            )
         }
     }
 }
