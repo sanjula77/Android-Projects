@@ -21,11 +21,12 @@ import androidx.navigation.createGraph
 import com.example.navigation1.screens.ScreenOne
 import com.example.navigation1.screens.ScreenThree
 import com.example.navigation1.screens.ScreenTwo
+import com.example.navigation1.viewModel.SharedViewModel
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun NavScaffold(navController: NavHostController) {
+fun NavScaffold(navController: NavHostController, sharedViewModel: SharedViewModel) {
 
     val isBackEnabled =  remember {
         mutableStateOf(false)
@@ -75,11 +76,13 @@ fun NavScaffold(navController: NavHostController) {
         // Rest of the content
         paddingValues ->
 
-        NavHost(navController = navController, graph = getMyNavGraph(navController, paddingValues))
+        NavHost(navController = navController, graph = getMyNavGraph(navController, paddingValues, sharedViewModel))
     }
 }
 
 // Define the navigation graph
+
+/*
 fun NavGraphBuilder.navigationGraph(navController: NavController, paddingValues: PaddingValues) {
     composable("screen_one") {
         ScreenOne(navController)
@@ -95,21 +98,18 @@ fun NavGraphBuilder.navigationGraph(navController: NavController, paddingValues:
         ScreenThree(navController, modifier = Modifier.padding(paddingValues))
     }
 }
+*/
 
 // Create the NavGraph
-fun getMyNavGraph(controller: NavController, paddingValues: PaddingValues): NavGraph {
+fun getMyNavGraph(controller: NavController, paddingValues: PaddingValues, sharedViewModel: SharedViewModel): NavGraph {
     return controller.createGraph(startDestination = "screen_one") {
+
         composable("screen_one") {
-            ScreenOne(controller)
+            ScreenOne(controller, sharedViewModel)
         }
 
-        composable("screen_two/{id}") {
-            val stringId = it.arguments?.getString("id") ?: "0"
-            val data = stringId.toInt()
-            controller.currentBackStackEntry?.arguments?.apply {
-                putInt("id", data)
-            }
-            ScreenTwo(controller)
+        composable("screen_two") {
+            ScreenTwo(controller, sharedViewModel)
         }
 
         composable("screen_three") {

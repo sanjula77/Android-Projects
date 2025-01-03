@@ -18,10 +18,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.navigation1.MyApplication
+import com.example.navigation1.viewModel.SharedViewModel
 
 
 @Composable
-fun ScreenTwo(navController: NavController) {
+fun ScreenTwo(navController: NavController, sharedViewModel: SharedViewModel) {
 
     val context = LocalContext.current
     val myApplication = context.applicationContext as MyApplication
@@ -43,15 +44,11 @@ fun ScreenTwo(navController: NavController) {
 
             Spacer(modifier = Modifier.height(50.dp))
 
-            val stringId = navController.currentBackStackEntry?.arguments?.getString("id") ?: "0"
-            val data = stringId.toInt()
-            val student = myApplication.getRepository().getStudent(data)
-
-            Text(text = "Student ID: ${student.id}")
-            Text(text = "Name: ${student.name}")
-            Text(text = "Age: ${student.age}")
-            Text(text = "Grade: ${student.grade}")
-            Text(text = "Email: ${student.email}")
+            Text(text = "Student ID: ${sharedViewModel.student.value?.id}")
+            Text(text = "Name: ${sharedViewModel.student.value?.name}")
+            Text(text = "Age: ${sharedViewModel.student.value?.age}")
+            Text(text = "Grade: ${sharedViewModel.student.value?.grade}")
+            Text(text = "Email: ${sharedViewModel.student.value?.email}")
 
             Spacer(modifier = Modifier.height(50.dp))
             // Navigation to Screen Three

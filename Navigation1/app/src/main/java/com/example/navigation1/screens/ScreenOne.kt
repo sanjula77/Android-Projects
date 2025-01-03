@@ -16,9 +16,20 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.navigation1.data.Student
+import com.example.navigation1.viewModel.SharedViewModel
 
 @Composable
-fun ScreenOne(navController: NavController) {
+fun ScreenOne(navController: NavController, sharedViewModel: SharedViewModel) {
+
+    val sampleStudent = Student(
+        id = 1,
+        name = "John Doe",
+        age = 20,
+        grade = "A",
+        email = "john@example.com"
+    )
+
+
 
     Surface(
         modifier = Modifier.fillMaxSize(),
@@ -30,16 +41,16 @@ fun ScreenOne(navController: NavController) {
             verticalArrangement = Arrangement.Center
         ) {
 
-
-            val id = 2
-
             Text(
                 text = "Screen One",
                 style = MaterialTheme.typography.headlineMedium,
                 fontWeight = FontWeight.SemiBold
             )
             Spacer(modifier = Modifier.height(50.dp))
-            Button(onClick = {navController.navigate("screen_two/$id")}) {
+            Button(onClick = {
+                sharedViewModel.student.value = sampleStudent
+                navController.navigate("screen_two")})
+            {
                 Text(
                     text = "screen two"
                 )
