@@ -15,18 +15,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.example.navigation1.Student
-import kotlinx.serialization.json.Json
+import com.example.navigation1.data.Student
 
 @Composable
-fun ScreenOne(navController: NavController, modifier: Modifier) {
-
-    val sampleStudent = Student (
-        name = "John Doe",
-        age = 20,
-        grade = "A",
-        email = "harrison@example.com"
-    )
+fun ScreenOne(navController: NavController) {
 
     Surface(
         modifier = Modifier.fillMaxSize(),
@@ -38,8 +30,8 @@ fun ScreenOne(navController: NavController, modifier: Modifier) {
             verticalArrangement = Arrangement.Center
         ) {
 
-            val json = Json { prettyPrint = true }
-            val data = json.encodeToString(Student.serializer(), sampleStudent)
+
+            val id = 2
 
             Text(
                 text = "Screen One",
@@ -47,7 +39,7 @@ fun ScreenOne(navController: NavController, modifier: Modifier) {
                 fontWeight = FontWeight.SemiBold
             )
             Spacer(modifier = Modifier.height(50.dp))
-            Button(onClick = {navController.navigate("screen_two/$data")}) {
+            Button(onClick = {navController.navigate("screen_two/$id")}) {
                 Text(
                     text = "screen two"
                 )

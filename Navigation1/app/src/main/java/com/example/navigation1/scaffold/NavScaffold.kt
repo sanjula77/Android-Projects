@@ -8,10 +8,8 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph
@@ -84,14 +82,14 @@ fun NavScaffold(navController: NavHostController) {
 // Define the navigation graph
 fun NavGraphBuilder.navigationGraph(navController: NavController, paddingValues: PaddingValues) {
     composable("screen_one") {
-        ScreenOne(navController, modifier = Modifier.padding(paddingValues))
+        ScreenOne(navController)
     }
     composable("screen_two") {
 
         val data = it.arguments?.getString("data") ?: "No data available"
         navController.currentBackStackEntry?.arguments?.putString("data", data)
 
-        ScreenTwo(navController, modifier = Modifier.padding(paddingValues))
+        ScreenTwo(navController)
     }
     composable("screen_three") {
         ScreenThree(navController, modifier = Modifier.padding(paddingValues))
@@ -102,14 +100,16 @@ fun NavGraphBuilder.navigationGraph(navController: NavController, paddingValues:
 fun getMyNavGraph(controller: NavController, paddingValues: PaddingValues): NavGraph {
     return controller.createGraph(startDestination = "screen_one") {
         composable("screen_one") {
-            ScreenOne(controller, modifier = Modifier.padding(paddingValues))
+            ScreenOne(controller)
         }
 
-        composable("screen_two/{data}") {
-            val data = it.arguments?.getString("data") ?: "No data available"
-            controller.currentBackStackEntry?.arguments?.putString("data", data)
-
-            ScreenTwo(controller,modifier = Modifier.padding(paddingValues))
+        composable("screen_two/{id}") {
+            val stringId = it.arguments?.getString("id") ?: "0"
+            val data = stringId.toInt()
+            controller.currentBackStackEntry?.arguments?.apply {
+                putInt("id", data)
+            }
+            ScreenTwo(controller)
         }
 
         composable("screen_three") {

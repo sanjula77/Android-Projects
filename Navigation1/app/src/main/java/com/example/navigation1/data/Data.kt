@@ -1,9 +1,7 @@
-package com.example.navigation1
+package com.example.navigation1.data
 
-import kotlinx.serialization.Serializable
-
-@Serializable
 data class Student(
+    val id: Int,
     val name: String,
     val age: Int,
     val grade: String,

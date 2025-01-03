@@ -1,5 +1,6 @@
 package com.example.navigation1.screens
 
+
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -12,16 +13,19 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.example.navigation1.Student
-import kotlinx.serialization.json.Json
+import com.example.navigation1.MyApplication
 
-private val json = Json { prettyPrint = true }
 
 @Composable
-fun ScreenTwo(navController: NavController, modifier: Modifier) {
+fun ScreenTwo(navController: NavController) {
+
+    val context = LocalContext.current
+    val myApplication = context.applicationContext as MyApplication
+
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background
@@ -39,30 +43,17 @@ fun ScreenTwo(navController: NavController, modifier: Modifier) {
 
             Spacer(modifier = Modifier.height(50.dp))
 
-            // Retrieve the data passed via navigation arguments
-            val jsonData = navController.currentBackStackEntry?.arguments?.getString("data")
+            val stringId = navController.currentBackStackEntry?.arguments?.getString("id") ?: "0"
+            val data = stringId.toInt()
+            val student = myApplication.getRepository().getStudent(data)
 
-            // Updated: Add error handling for null or malformed JSON
-            val sampleStudent = try {
-                if (jsonData != null) {
-                    json.decodeFromString(Student.serializer(), jsonData)
-                } else {
-                    // Default fallback if no data is passed
-                    Student(name = "Unknown", age = 0, grade = "N/A", email = "N/A")
-                }
-            } catch (e: Exception) {
-                // Handle invalid JSON format gracefully
-                Student(name = "Error", age = 0, grade = "Invalid Data", email = "N/A")
-            }
-
-            // Display student information
-            Text(text = "Name: ${sampleStudent.name}")
-            Text(text = "Age: ${sampleStudent.age}")
-            Text(text = "Grade: ${sampleStudent.grade}")
-            Text(text = "Email: ${sampleStudent.email}")
+            Text(text = "Student ID: ${student.id}")
+            Text(text = "Name: ${student.name}")
+            Text(text = "Age: ${student.age}")
+            Text(text = "Grade: ${student.grade}")
+            Text(text = "Email: ${student.email}")
 
             Spacer(modifier = Modifier.height(50.dp))
-
             // Navigation to Screen Three
             Button(onClick = { navController.navigate("screen_three") }) {
                 Text(text = "screen Three")
