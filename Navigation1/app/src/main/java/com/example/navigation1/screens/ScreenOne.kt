@@ -5,21 +5,42 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Info
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.navigation1.component.SampleDialog
 import com.example.navigation1.data.Student
 import com.example.navigation1.viewModel.SharedViewModel
 
 @Composable
 fun ScreenOne(navController: NavController, sharedViewModel: SharedViewModel) {
+
+    val isDialogVisible = remember {
+        mutableStateOf(false)
+    }
+
+    when {
+        isDialogVisible.value -> {
+            SampleDialog(
+                onDismissRequest = { isDialogVisible.value = false },
+                onConfirmation = { isDialogVisible.value = false },
+                dialogTitle = "Sample Dialog",
+                dialogText = "This is a sample dialog.",
+                icon = Icons.Filled.Info
+            )
+        }
+    }
 
 /*
     val sampleStudent = Student(
@@ -40,6 +61,12 @@ fun ScreenOne(navController: NavController, sharedViewModel: SharedViewModel) {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
+
+            Button(onClick = {
+                isDialogVisible.value = true
+            }) {
+                Text(text = "Show Dialog")
+            }
 
             Text(
                 text = "Screen One",
